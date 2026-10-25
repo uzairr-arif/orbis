@@ -229,10 +229,12 @@ pub fn unix_now() -> u64 {
 }
 
 /// Merge a re-observed finding into a stored one: keep the ID and first_seen,
-/// refresh last_seen, and merge evidence lists.
+/// refresh last_seen, and merge evidence lists. Severity keeps the more
+/// severe value: with the Ord convention (Critical sorts first), that is
+/// `.min()`, not `.max()`.
 pub fn merge(stored: &mut Finding, fresh: &Finding) {
     stored.last_seen = fresh.last_seen;
-    stored.severity = stored.severity.max(fresh.severity);
+    stored.severity = stored.severity.min(fresh.severity);
     stored.confidence = stored.confidence.max(fresh.confidence);
     for ev in &fresh.evidence {
         if !stored.evidence.iter().any(|e| e.detail == ev.detail) {
@@ -302,6 +304,20 @@ mod tests {
         let merged = dedupe(vec![base, repeat]);
         assert_eq!(merged.len(), 1);
         assert_eq!(merged[0].evidence.len(), 2);
+    }
+
+    #[test]
+    fn merge_keeps_the_worst_severity() {
+        let mut stored = sample("Vulnerable OpenSSL version", "openssl");
+        let mut escalated = sample("Vulnerable OpenSSL version", "openssl");
+        escalated.severity = Severity::Critical;
+        merge(&mut stored, &escalated);
+        assert_eq!(stored.severity, Severity::Critical);
+
+        let mut milder = sample("Vulnerable OpenSSL version", "openssl");
+        milder.severity = Severity::Low;
+        merge(&mut stored, &milder);
+        assert_eq!(stored.severity, Severity::Critical);
     }
 
     #[test]
