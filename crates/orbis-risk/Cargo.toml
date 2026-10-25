@@ -1,0 +1,8 @@
+[package]
+name = "orbis-risk"
+version.workspace = true
+edition.workspace = true
+description = "Context-aware risk assessment and security scoring"
+
+[dependencies]
+orbis-core = { path = "../orbis-core" }
