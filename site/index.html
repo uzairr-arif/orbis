@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbis - Open-source security visibility and remediation</title>
+  <meta name="description" content="Orbis connects the security scanners you already run, explains what actually matters, and helps you fix it safely. Local-first and open source.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#" aria-label="Orbis home">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <circle cx="16" cy="16" r="6" stroke="var(--logo-accent)" stroke-width="2.2"/>
+          <ellipse cx="16" cy="16" rx="13" ry="5.2" stroke="var(--logo-ring)" stroke-width="2" transform="rotate(-22 16 16)"/>
+          <circle cx="28" cy="13.1" r="2.5" fill="var(--logo-accent)"/>
+        </svg>
+        Orbis
+      </a>
+      <ul class="nav-links">
+        <li><a href="#loop">How it works</a></li>
+        <li><a href="#correlation">Correlation</a></li>
+        <li><a href="#risk">Risk model</a></li>
+        <li><a href="#principles">Principles</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="icon-btn" href="https://github.com/orbis" aria-label="Orbis on GitHub" target="_blank" rel="noopener">
+          <i class="ph ph-github-logo" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary" href="#install">Install</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ============ Hero ============ -->
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Security noise in.<br>Actions out.</h1>
+          <p class="hero-sub">Orbis connects the scanners you already run, explains what actually matters, and helps you fix it safely.</p>
+          <div class="hero-ctas">
+            <button class="cmd" type="button" data-copy="curl -fsSL https://orbis.sh/install | sh" aria-label="Copy install command">
+              <span class="dollar">$</span>
+              <span class="cmd-text">curl -fsSL https://orbis.sh/install | sh</span>
+              <span class="copy-btn"><i class="ph ph-copy" aria-hidden="true"></i></span>
+            </button>
+            <a class="btn btn-ghost" href="https://github.com/orbis" target="_blank" rel="noopener">
+              <i class="ph ph-github-logo" aria-hidden="true"></i>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="term" role="img" aria-label="Terminal showing the output of the orbis scan command: a security score of 72 out of 100, two critical, five high and eleven medium findings, the three biggest risks, and a recommended first action.">
+          <div class="term-bar">
+            <span class="term-title">orbis scan</span>
+            <span>server-01</span>
+          </div>
+          <div class="term-body">
+            <span class="t-line" style="--d:.05s"><span class="t-prompt">$</span> orbis scan</span>
+            <span class="t-line" style="--d:.2s"><span class="t-dim">collectors: nmap, lynis, trivy, gitleaks</span></span>
+            <span class="t-rule t-line" style="--d:.35s"></span>
+            <span class="t-line" style="--d:.45s"><span class="t-b">Score</span>              <span class="t-score">72 / 100</span></span>
+            <span class="t-line" style="--d:.55s"><span class="sev-dot crit"></span><span class="t-crit">2 critical</span>   <span class="sev-dot high"></span><span class="t-high">5 high</span>   <span class="sev-dot med"></span><span class="t-med">11 medium</span></span>
+            <span class="t-line gap" style="--d:.6s"></span>
+            <span class="t-rule t-line" style="--d:.7s"></span>
+            <span class="t-line" style="--d:.8s"><span class="t-b">Biggest risks</span></span>
+            <span class="t-line" style="--d:.9s"><span class="t-dim">1</span>  SSH exposed to the internet with</span>
+            <span class="t-line" style="--d:.95s">   password authentication enabled</span>
+            <span class="t-line" style="--d:1.05s"><span class="t-dim">2</span>  nginx running a known vulnerable build</span>
+            <span class="t-line" style="--d:1.15s"><span class="t-dim">3</span>  AWS credential found in repository</span>
+            <span class="t-rule t-line" style="--d:1.3s"></span>
+            <span class="t-line" style="--d:1.4s"><span class="t-b">Recommended first action</span></span>
+            <span class="t-line" style="--d:1.5s"><span class="t-accent">→</span> Restrict SSH access to trusted networks</span>
+            <span class="t-line" style="--d:1.65s"><a class="term-cta" href="#remediation">Preview fix</a></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ Integrations ============ -->
+    <section class="section" id="integrations">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>It runs the tools you already trust</h2>
+          <p>Orbis is not another scanner. It orchestrates the collectors you have, normalizes their output into one finding model, and correlates across them.</p>
+        </div>
+        <div class="integrations-grid">
+          <div class="tool-tile reveal" style="--i:0"><span class="tool-glyph">NM</span><span><span class="tool-name">nmap</span><span class="tool-scope">Network discovery</span></span></div>
+          <div class="tool-tile reveal" style="--i:1"><span class="tool-glyph">LY</span><span><span class="tool-name">lynis</span><span class="tool-scope">Host hardening</span></span></div>
+          <div class="tool-tile reveal" style="--i:2"><span class="tool-glyph">TV</span><span><span class="tool-name">trivy</span><span class="tool-scope">Containers</span></span></div>
+          <div class="tool-tile reveal" style="--i:3"><span class="tool-glyph">GR</span><span><span class="tool-name">grype</span><span class="tool-scope">Dependencies</span></span></div>
+          <div class="tool-tile reveal" style="--i:4"><span class="tool-glyph">SG</span><span><span class="tool-name">semgrep</span><span class="tool-scope">Static analysis</span></span></div>
+          <div class="tool-tile reveal" style="--i:5"><span class="tool-glyph">GL</span><span><span class="tool-name">gitleaks</span><span class="tool-scope">Secrets</span></span></div>
+          <div class="tool-tile reveal" style="--i:6"><span class="tool-glyph">OQ</span><span><span class="tool-name">osquery</span><span class="tool-scope">System queries</span></span></div>
+          <div class="tool-tile reveal" style="--i:7"><span class="tool-glyph">AD</span><span><span class="tool-name">auditd</span><span class="tool-scope">Linux audit</span></span></div>
+          <div class="tool-tile reveal" style="--i:8"><span class="tool-glyph">SY</span><span><span class="tool-name">syft</span><span class="tool-scope">SBOM</span></span></div>
+          <div class="tool-tile reveal" style="--i:9"><span class="tool-glyph">KB</span><span><span class="tool-name">kube-bench</span><span class="tool-scope">Kubernetes</span></span></div>
+          <div class="tool-tile reveal" style="--i:10"><span class="tool-glyph">DK</span><span><span class="tool-name">docker</span><span class="tool-scope">Runtime</span></span></div>
+          <div class="tool-tile reveal" style="--i:11"><span class="tool-glyph">GH</span><span><span class="tool-name">github</span><span class="tool-scope">Pull requests</span></span></div>
+        </div>
+        <p class="grid-note reveal">The first release ships with nmap, lynis, trivy, and gitleaks. Every collector implements the same adapter contract, so the list grows without changing the core.</p>
+      </div>
+    </section>
+
+    <!-- ============ Loop ============ -->
+    <section class="section" id="loop">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>One loop, six verbs</h2>
+          <p>Every capability in Orbis serves one of six moments. If a feature does not fit the loop, it does not ship.</p>
+        </div>
+        <div class="loop-wrap">
+          <div class="loop-track">
+            <div class="loop-node reveal" style="--i:0">
+              <span class="loop-icon"><i class="ph ph-radar" aria-hidden="true"></i></span>
+              <div class="loop-verb">Discover</div>
+              <p class="loop-gloss">Find every asset you run</p>
+            </div>
+            <div class="loop-node reveal" style="--i:1">
+              <span class="loop-icon"><i class="ph ph-tree-structure" aria-hidden="true"></i></span>
+              <div class="loop-verb">Understand</div>
+              <p class="loop-gloss">Normalize and correlate findings</p>
+            </div>
+            <div class="loop-node reveal" style="--i:2">
+              <span class="loop-icon"><i class="ph ph-list-numbers" aria-hidden="true"></i></span>
+              <div class="loop-verb">Prioritize</div>
+              <p class="loop-gloss">Rank by real risk, not volume</p>
+            </div>
+            <div class="loop-node reveal" style="--i:3">
+              <span class="loop-icon"><i class="ph ph-wrench" aria-hidden="true"></i></span>
+              <div class="loop-verb">Fix</div>
+              <p class="loop-gloss">Preview, approve, apply</p>
+            </div>
+            <div class="loop-node reveal" style="--i:4">
+              <span class="loop-icon"><i class="ph ph-seal-check" aria-hidden="true"></i></span>
+              <div class="loop-verb">Verify</div>
+              <p class="loop-gloss">Rescan and confirm the fix</p>
+            </div>
+            <div class="loop-node reveal" style="--i:5">
+              <span class="loop-icon"><i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i></span>
+              <div class="loop-verb">Remember</div>
+              <p class="loop-gloss">Keep history, diff over time</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Correlation ============ -->
+    <section class="section" id="correlation">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">Correlation engine</p>
+          <h2>Three findings. One attack path.</h2>
+          <p>Separate tools report fragments of the same problem. Orbis joins them into a single, explainable path so you fix the surface, not the symptoms.</p>
+        </div>
+        <div class="corr-grid">
+          <div class="raw-stack">
+            <div class="raw-card reveal" style="--i:0">
+              <span class="raw-src">nmap</span>
+              22/tcp  open  ssh
+            </div>
+            <div class="raw-card reveal" style="--i:1">
+              <span class="raw-src">lynis</span>
+              SSH: root login permitted
+            </div>
+            <div class="raw-card reveal" style="--i:2">
+              <span class="raw-src">sshd_config</span>
+              PasswordAuthentication yes
+            </div>
+          </div>
+          <div class="corr-join reveal" style="--i:3" aria-hidden="true">
+            <i class="ph-bold ph-arrow-right"></i>
+          </div>
+          <div class="path-panel reveal" style="--i:4">
+            <p class="path-title">Attack path ORB-8F42</p>
+            <ul class="path-chain">
+              <li><span class="path-node"><i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i></span>Internet</li>
+              <li><span class="path-node"><i class="ph ph-broadcast" aria-hidden="true"></i></span>Public IP 203.0.113.7</li>
+              <li><span class="path-node"><i class="ph ph-network" aria-hidden="true"></i></span>TCP/22</li>
+              <li><span class="path-node"><i class="ph ph-terminal-window" aria-hidden="true"></i></span>OpenSSH 9.2</li>
+              <li><span class="path-node"><i class="ph ph-password" aria-hidden="true"></i></span>Password authentication</li>
+              <li class="hot"><span class="path-node"><i class="ph ph-crown-simple" aria-hidden="true"></i></span>Root account</li>
+            </ul>
+            <p class="path-risk">Three findings collapsed into one path. Orbis risk: <strong>high</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Risk ============ -->
+    <section class="section" id="risk">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Same CVE. Different risk.</h2>
+          <p>Raw severity treats every finding as equally urgent. Orbis weighs context, so the internet-facing database gets fixed today and the dev-only dependency gets a ticket.</p>
+        </div>
+        <div class="risk-formula reveal" role="math" aria-label="Risk equals severity times exploitability times exposure times asset criticality times confidence">
+          risk <span class="op">=</span> <span class="f">severity</span> <span class="op">×</span> <span class="f">exploitability</span> <span class="op">×</span> <span class="f">exposure</span> <span class="op">×</span> <span class="f">criticality</span> <span class="op">×</span> <span class="f">confidence</span>
+        </div>
+        <div class="risk-pair">
+          <div class="risk-card reveal" style="--i:0">
+            <p class="risk-cve">Finding <strong>ORB-9C21</strong>, CVSS 8.2</p>
+            <ul class="risk-rows">
+              <li><span class="k">Exposure</span><span class="v">internet</span></li>
+              <li><span class="k">Exploitability</span><span class="v">high</span></li>
+              <li><span class="k">Asset</span><span class="v">production</span></li>
+              <li><span class="k">Confidence</span><span class="v">0.98</span></li>
+            </ul>
+            <span class="risk-verdict critical">ORBIS RISK: CRITICAL</span>
+          </div>
+          <div class="risk-card reveal" style="--i:1">
+            <p class="risk-cve">Finding <strong>ORB-A117</strong>, CVSS 8.2</p>
+            <ul class="risk-rows">
+              <li><span class="k">Exposure</span><span class="v">localhost</span></li>
+              <li><span class="k">Exploitability</span><span class="v">low</span></li>
+              <li><span class="k">Asset</span><span class="v">development</span></li>
+              <li><span class="k">Confidence</span><span class="v">0.98</span></li>
+            </ul>
+            <span class="risk-verdict medium">ORBIS RISK: MEDIUM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Remediation ============ -->
+    <section class="section" id="remediation">
+      <div class="container rem-grid">
+        <div>
+          <div class="section-head reveal" style="margin-bottom:0">
+            <h2>Every fix is previewed, approved, and reversible</h2>
+            <p>Orbis never changes your machine on its own. A fix is a proposal you review, apply with one command, and can undo with another.</p>
+          </div>
+          <ul class="rem-list">
+            <li class="reveal" style="--i:0">
+              <i class="ph ph-code" aria-hidden="true"></i>
+              <div><strong>Preview first</strong>
+                <span class="rem-why">Every fix arrives as a reviewable diff. Nothing touches disk until you say so.</span>
+              </div>
+            </li>
+            <li class="reveal" style="--i:1">
+              <i class="ph ph-hand-raised" aria-hidden="true"></i>
+              <div><strong>Explicit approval</strong>
+                <span class="rem-why">Destructive changes stop for a yes. Approval is per change, never global.</span>
+              </div>
+            </li>
+            <li class="reveal" style="--i:2">
+              <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
+              <div><strong>Rollback built in</strong>
+                <span class="rem-why">Each change records before and after hashes, so one command restores the prior state.</span>
+              </div>
+            </li>
+            <li class="reveal" style="--i:3">
+              <i class="ph ph-check-circle" aria-hidden="true"></i>
+              <div><strong>Verified, not assumed</strong>
+                <span class="rem-why">After a fix applies, Orbis rescans the finding and writes the result to history.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="diff-panel reveal" role="img" aria-label="Preview of a fix to the SSH daemon configuration: disabling root login and password authentication.">
+          <div class="diff-head">
+            <span class="diff-file">/etc/ssh/sshd_config</span>
+            <span>finding ORB-8F42, preview</span>
+          </div>
+          <div class="diff-body">
+            <div class="diff-line diff-ctx"><span class="sign"></span># Authentication:</div>
+            <div class="diff-line del"><span class="sign">-</span>PermitRootLogin yes</div>
+            <div class="diff-line add"><span class="sign">+</span>PermitRootLogin no</div>
+            <div class="diff-line del"><span class="sign">-</span>PasswordAuthentication yes</div>
+            <div class="diff-line add"><span class="sign">+</span>PasswordAuthentication no</div>
+            <div class="diff-line diff-ctx"><span class="sign"></span># End of file</div>
+          </div>
+          <div class="diff-foot">
+            <span class="ok">Rollback available</span>
+            <span>Service: sshd</span>
+            <span>orbis fix ORB-8F42</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Principles ============ -->
+    <section class="section" id="principles">
+      <div class="container prin-grid">
+        <div class="prin-sticky reveal">
+          <p class="kicker">Operating principles</p>
+          <div class="section-head" style="margin-bottom:0">
+            <h2>Guardrails, not autopilot</h2>
+            <p>Orbis sits between your scanners and your systems. That position demands restraint, and restraint is designed in.</p>
+          </div>
+        </div>
+        <ul class="prin-list">
+          <li class="reveal" style="--i:0">
+            <i class="ph ph-hard-drives" aria-hidden="true"></i>
+            <div><h3>Local-first</h3><p>The first release works fully offline. Nothing leaves the machine unless you configure it.</p></div>
+          </li>
+          <li class="reveal" style="--i:1">
+            <i class="ph ph-brain" aria-hidden="true"></i>
+            <div><h3>Evidence-based AI</h3><p>Models explain findings and draft fixes. Evidence comes from scanners, never from the model.</p></div>
+          </li>
+          <li class="reveal" style="--i:2">
+            <i class="ph ph-lock-simple" aria-hidden="true"></i>
+            <div><h3>Least privilege</h3><p>Agents and plugins run with the permissions they declare, and nothing more.</p></div>
+          </li>
+          <li class="reveal" style="--i:3">
+            <i class="ph ph-fingerprint" aria-hidden="true"></i>
+            <div><h3>Human approval</h3><p>Automated remediation stops for a yes. Destructive actions are never silent.</p></div>
+          </li>
+          <li class="reveal span-2" style="--i:4">
+            <i class="ph ph-eye-slash" aria-hidden="true"></i>
+            <div><h3>No secret collection</h3><p>Passwords, keys, and source stay local by default. Any upload is explicit and scoped.</p></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Final CTA ============ -->
+    <section class="final" id="install">
+      <div class="container final-inner">
+        <div class="reveal">
+          <h2>Start with one command</h2>
+          <p>One binary, four collectors, and a report you can read in a minute. Local by default.</p>
+        </div>
+        <div class="final-ctas reveal" style="--i:1">
+          <button class="cmd" type="button" data-copy="curl -fsSL https://orbis.sh/install | sh" aria-label="Copy install command">
+            <span class="dollar">$</span>
+            <span class="cmd-text">curl -fsSL https://orbis.sh/install | sh</span>
+            <span class="copy-btn"><i class="ph ph-copy" aria-hidden="true"></i></span>
+          </button>
+          <a class="btn btn-ghost" href="https://github.com/orbis" target="_blank" rel="noopener">
+            <i class="ph ph-github-logo" aria-hidden="true"></i>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="#">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <circle cx="16" cy="16" r="6" stroke="var(--logo-accent)" stroke-width="2.2"/>
+              <ellipse cx="16" cy="16" rx="13" ry="5.2" stroke="var(--logo-ring)" stroke-width="2" transform="rotate(-22 16 16)"/>
+              <circle cx="28" cy="13.1" r="2.5" fill="var(--logo-accent)"/>
+            </svg>
+            Orbis
+          </a>
+          <p>Open-source security visibility and remediation.</p>
+        </div>
+        <div class="foot-col">
+          <h3>Project</h3>
+          <ul>
+            <li><a href="https://github.com/orbis">GitHub repository</a></li>
+            <li><a href="#loop">Roadmap</a></li>
+            <li><a href="#integrations">Collectors</a></li>
+            <li><a href="#risk">Risk model</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#install">Install guide</a></li>
+            <li><a href="#correlation">Finding schema</a></li>
+            <li><a href="#integrations">Adapter contract</a></li>
+            <li><a href="#remediation">Change records</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="https://github.com/orbis">Issues</a></li>
+            <li><a href="https://github.com/orbis">Discussions</a></li>
+            <li><a href="https://github.com/orbis">Security policy</a></li>
+            <li><a href="https://github.com/orbis">Contributing</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 The Orbis contributors</span>
+        <span>Orbis is a working codename. Naming and trademark clearance in progress.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
