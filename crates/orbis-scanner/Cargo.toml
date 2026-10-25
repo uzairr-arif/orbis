@@ -1,0 +1,14 @@
+[package]
+name = "orbis-scanner"
+version.workspace = true
+edition.workspace = true
+description = "Collector adapters: wrap existing scanners and normalize their output"
+
+[dependencies]
+orbis-core = { path = "../orbis-core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+roxmltree = "0.20"
+
+[dev-dependencies]

@@ -1,0 +1,13 @@
+# Demo fixture modeled on the lynis report.dat format
+# host=server-01
+# lynis_version=3.0.9
+
+warning[]=SSH-7408|text=Root login is permitted via SSH
+warning[]=SSH-7407|text=Password authentication is enabled for SSH
+warning[]=FIRE-4513|text=No firewall is active on this host
+warning[]=PKGS-7410|text=Outdated packages found (12 patches available)
+warning[]=LOGG-2190|text=No syslog daemon is active
+
+suggestion[]=SSH-7404|text=Weak SSH ciphers are still enabled|details=Remove 3des-cbc from Ciphers
+suggestion[]=AUTH-9286|text=Default umask may be too permissive|details=Set umask to 027 in /etc/profile
+suggestion[]=BANN-7126|text=No issue banner shown before login|details=Configure Banner in /etc/ssh/sshd_config

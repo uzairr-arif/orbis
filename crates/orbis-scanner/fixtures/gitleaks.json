@@ -1,0 +1,22 @@
+[
+  {
+    "RuleID": "aws-access-token",
+    "Description": "AWS Access Key ID",
+    "File": "deploy/.env",
+    "StartLine": 4,
+    "Secret": "AKIAQVZEXAMPLEKEY1",
+    "Commit": "9f31c0a",
+    "Author": "dev@example.com",
+    "Date": "2026-10-18T09:14:00Z"
+  },
+  {
+    "RuleID": "generic-api-key",
+    "Description": "Generic API Key",
+    "File": "src/config/payments.ts",
+    "StartLine": 27,
+    "Secret": "sk_live_51HxQeXAMPLEt9bKC",
+    "Commit": "41b8de2",
+    "Author": "dev@example.com",
+    "Date": "2026-10-21T16:40:00Z"
+  }
+]
