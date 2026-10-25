@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/uzairr-arif/Orbis/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/uzairr-arif/Orbis/actions/workflows/ci.yml/badge.svg"></a>
   <a href="#license" alt="License"><img src="https://img.shields.io/badge/license-Apache--2.0-269B79"></a>
   <a href="https://www.rust-lang.org/" alt="Rust"><img src="https://img.shields.io/badge/built%20with-Rust-444?logo=rust&logoColor=white"></a>
   <a href="#quickstart" alt="Platforms"><img src="https://img.shields.io/badge/platform-linux%20%C2%B7%20windows%20%C2%B7%20macos-444"></a>
@@ -122,6 +123,8 @@ orbis report --json               # machine-readable, pipe it anywhere
 Or straight from a checkout:
 
 ```bash
+git clone https://github.com/uzairr-arif/Orbis.git
+cd Orbis
 cargo build --release             # binary at target/release/orbis
 cargo test                        # unit tests + end-to-end demo pipeline
 ```
@@ -168,6 +171,4 @@ musicians.
 
 ## License
 
-Apache-2.0. See [LICENSE](LICENSE). The license grants code and patents, not
-the "Orbis" name (currently a working codename while naming and trademark
-clearance is pending).
+Apache-2.0. See [LICENSE](LICENSE).
