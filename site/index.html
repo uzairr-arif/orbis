@@ -3,8 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F8F7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D1110">
   <title>Orbis - Open-source security visibility and remediation</title>
   <meta name="description" content="Orbis connects the security scanners you already run, explains what actually matters, and helps you fix it safely. Local-first and open source.">
+  <meta property="og:url" content="https://uzairr-arif.github.io/orbis/">
+  <meta property="og:title" content="Orbis - Security noise in. Actions out.">
+  <meta property="og:description" content="Orbis connects the security scanners you already run, explains what actually matters, and helps you fix it safely. Local-first and open source.">
+  <meta property="og:image" content="https://uzairr-arif.github.io/orbis/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Orbis - Security noise in. Actions out.">
+  <meta name="twitter:description" content="Open-source security visibility and remediation. Local-first. No cloud required.">
+  <meta name="twitter:image" content="https://uzairr-arif.github.io/orbis/assets/og-card.png">
+  <script>
+    /* Resolve the theme before first paint. ?theme=light|dark wins once,
+       then the saved choice, then the system preference. */
+    (function () {
+      var chosen = null;
+      try {
+        var q = new URLSearchParams(location.search).get("theme");
+        chosen = (q === "light" || q === "dark") ? q : localStorage.getItem("theme");
+      } catch (e) {}
+      var dark = chosen ? chosen === "dark"
+        : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+    })();
+  </script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
@@ -30,7 +55,10 @@
         <li><a href="#principles">Principles</a></li>
       </ul>
       <div class="nav-cta">
-        <a class="icon-btn" href="https://github.com/orbis" aria-label="Orbis on GitHub" target="_blank" rel="noopener">
+        <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+          <i class="ph ph-moon-stars" aria-hidden="true"></i>
+        </button>
+        <a class="icon-btn" href="https://github.com/uzairr-arif/Orbis" aria-label="Orbis on GitHub" target="_blank" rel="noopener">
           <i class="ph ph-github-logo" aria-hidden="true"></i>
         </a>
         <a class="btn btn-primary" href="#install">Install</a>
@@ -47,19 +75,19 @@
           <h1>Security noise in.<br>Actions out.</h1>
           <p class="hero-sub">Orbis connects the scanners you already run, explains what actually matters, and helps you fix it safely.</p>
           <div class="hero-ctas">
-            <button class="cmd" type="button" data-copy="curl -fsSL https://orbis.sh/install | sh" aria-label="Copy install command">
+            <button class="cmd" type="button" data-copy="cargo install orbis-cli" aria-label="Copy install command">
               <span class="dollar">$</span>
-              <span class="cmd-text">curl -fsSL https://orbis.sh/install | sh</span>
+              <span class="cmd-text">cargo install orbis-cli</span>
               <span class="copy-btn"><i class="ph ph-copy" aria-hidden="true"></i></span>
             </button>
-            <a class="btn btn-ghost" href="https://github.com/orbis" target="_blank" rel="noopener">
+            <a class="btn btn-ghost" href="https://github.com/uzairr-arif/Orbis" target="_blank" rel="noopener">
               <i class="ph ph-github-logo" aria-hidden="true"></i>
               View on GitHub
             </a>
           </div>
         </div>
 
-        <div class="term" role="img" aria-label="Terminal showing the output of the orbis scan command: a security score of 72 out of 100, two critical, five high and eleven medium findings, the three biggest risks, and a recommended first action.">
+        <div class="term" role="img" aria-label="Terminal showing the output of the orbis scan command: a security score of 65 out of 100, one critical, one high and six medium findings, the three biggest risks, and a recommended first action.">
           <div class="term-bar">
             <span class="term-title">orbis scan</span>
             <span>server-01</span>
@@ -68,18 +96,18 @@
             <span class="t-line" style="--d:.05s"><span class="t-prompt">$</span> orbis scan</span>
             <span class="t-line" style="--d:.2s"><span class="t-dim">collectors: nmap, lynis, trivy, gitleaks</span></span>
             <span class="t-rule t-line" style="--d:.35s"></span>
-            <span class="t-line" style="--d:.45s"><span class="t-b">Score</span>              <span class="t-score">72 / 100</span></span>
-            <span class="t-line" style="--d:.55s"><span class="sev-dot crit"></span><span class="t-crit">2 critical</span>   <span class="sev-dot high"></span><span class="t-high">5 high</span>   <span class="sev-dot med"></span><span class="t-med">11 medium</span></span>
+            <span class="t-line" style="--d:.45s"><span class="t-b">Score</span>              <span class="t-score">65 / 100</span></span>
+            <span class="t-line" style="--d:.55s"><span class="sev-dot crit"></span><span class="t-crit">1 critical</span>   <span class="sev-dot high"></span><span class="t-high">1 high</span>   <span class="sev-dot med"></span><span class="t-med">6 medium</span></span>
             <span class="t-line gap" style="--d:.6s"></span>
             <span class="t-rule t-line" style="--d:.7s"></span>
             <span class="t-line" style="--d:.8s"><span class="t-b">Biggest risks</span></span>
-            <span class="t-line" style="--d:.9s"><span class="t-dim">1</span>  SSH exposed to the internet with</span>
-            <span class="t-line" style="--d:.95s">   password authentication enabled</span>
-            <span class="t-line" style="--d:1.05s"><span class="t-dim">2</span>  nginx running a known vulnerable build</span>
-            <span class="t-line" style="--d:1.15s"><span class="t-dim">3</span>  AWS credential found in repository</span>
+            <span class="t-line" style="--d:.9s"><span class="t-dim">1</span>  AWS access key committed to repo</span>
+            <span class="t-line" style="--d:1.05s"><span class="t-dim">2</span>  SSH exposed to the internet with</span>
+            <span class="t-line" style="--d:1.1s">   password authentication enabled</span>
+            <span class="t-line" style="--d:1.15s"><span class="t-dim">3</span>  Generic API key in build config</span>
             <span class="t-rule t-line" style="--d:1.3s"></span>
             <span class="t-line" style="--d:1.4s"><span class="t-b">Recommended first action</span></span>
-            <span class="t-line" style="--d:1.5s"><span class="t-accent">→</span> Restrict SSH access to trusted networks</span>
+            <span class="t-line" style="--d:1.5s"><span class="t-accent">→</span> Rotate the committed AWS credential</span>
             <span class="t-line" style="--d:1.65s"><a class="term-cta" href="#remediation">Preview fix</a></span>
           </div>
         </div>
@@ -182,7 +210,7 @@
             <i class="ph-bold ph-arrow-right"></i>
           </div>
           <div class="path-panel reveal" style="--i:4">
-            <p class="path-title">Attack path ORB-8F42</p>
+            <p class="path-title">Attack path PATH-0528</p>
             <ul class="path-chain">
               <li><span class="path-node"><i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i></span>Internet</li>
               <li><span class="path-node"><i class="ph ph-broadcast" aria-hidden="true"></i></span>Public IP 203.0.113.7</li>
@@ -271,7 +299,7 @@
         <div class="diff-panel reveal" role="img" aria-label="Preview of a fix to the SSH daemon configuration: disabling root login and password authentication.">
           <div class="diff-head">
             <span class="diff-file">/etc/ssh/sshd_config</span>
-            <span>finding ORB-8F42, preview</span>
+            <span>finding ORB-49AC, preview</span>
           </div>
           <div class="diff-body">
             <div class="diff-line diff-ctx"><span class="sign"></span># Authentication:</div>
@@ -284,7 +312,7 @@
           <div class="diff-foot">
             <span class="ok">Rollback available</span>
             <span>Service: sshd</span>
-            <span>orbis fix ORB-8F42</span>
+            <span>orbis fix ORB-49AC</span>
           </div>
         </div>
       </div>
@@ -333,12 +361,12 @@
           <p>One binary, four collectors, and a report you can read in a minute. Local by default.</p>
         </div>
         <div class="final-ctas reveal" style="--i:1">
-          <button class="cmd" type="button" data-copy="curl -fsSL https://orbis.sh/install | sh" aria-label="Copy install command">
+          <button class="cmd" type="button" data-copy="cargo install orbis-cli" aria-label="Copy install command">
             <span class="dollar">$</span>
-            <span class="cmd-text">curl -fsSL https://orbis.sh/install | sh</span>
+            <span class="cmd-text">cargo install orbis-cli</span>
             <span class="copy-btn"><i class="ph ph-copy" aria-hidden="true"></i></span>
           </button>
-          <a class="btn btn-ghost" href="https://github.com/orbis" target="_blank" rel="noopener">
+          <a class="btn btn-ghost" href="https://github.com/uzairr-arif/Orbis" target="_blank" rel="noopener">
             <i class="ph ph-github-logo" aria-hidden="true"></i>
             View on GitHub
           </a>
@@ -364,34 +392,34 @@
         <div class="foot-col">
           <h3>Project</h3>
           <ul>
-            <li><a href="https://github.com/orbis">GitHub repository</a></li>
-            <li><a href="#loop">Roadmap</a></li>
-            <li><a href="#integrations">Collectors</a></li>
-            <li><a href="#risk">Risk model</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis">GitHub repository</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis/releases">Releases</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis/issues">Issues</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis/discussions">Discussions</a></li>
           </ul>
         </div>
         <div class="foot-col">
-          <h3>Resources</h3>
+          <h3>Explore</h3>
           <ul>
-            <li><a href="#install">Install guide</a></li>
-            <li><a href="#correlation">Finding schema</a></li>
-            <li><a href="#integrations">Adapter contract</a></li>
-            <li><a href="#remediation">Change records</a></li>
+            <li><a href="#loop">How it works</a></li>
+            <li><a href="#correlation">Correlation</a></li>
+            <li><a href="#risk">Risk model</a></li>
+            <li><a href="#install">Install</a></li>
           </ul>
         </div>
         <div class="foot-col">
           <h3>Community</h3>
           <ul>
-            <li><a href="https://github.com/orbis">Issues</a></li>
-            <li><a href="https://github.com/orbis">Discussions</a></li>
-            <li><a href="https://github.com/orbis">Security policy</a></li>
-            <li><a href="https://github.com/orbis">Contributing</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis/blob/main/CONTRIBUTING.md">Contributing</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis/blob/main/SECURITY.md">Security policy</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis/blob/main/CODE_OF_CONDUCT.md">Code of conduct</a></li>
+            <li><a href="https://github.com/uzairr-arif/Orbis/blob/main/LICENSE">License</a></li>
           </ul>
         </div>
       </div>
       <div class="foot-bottom">
         <span>© 2026 The Orbis contributors</span>
-        <span>Orbis is a working codename. Naming and trademark clearance in progress.</span>
+        <span>Released under the Apache-2.0 license.</span>
       </div>
     </div>
   </footer>

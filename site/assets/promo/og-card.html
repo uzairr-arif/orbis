@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  /* Orbis social preview card, 1280x640. Brand: ink + emerald, flat, no gradients. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: #0D1110;
+    color: #E8EEEB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 96px;
+  }
+  .left { max-width: 560px; }
+  .mark { margin-bottom: 36px; }
+  h1 {
+    font-size: 92px;
+    font-weight: 680;
+    letter-spacing: -0.032em;
+    line-height: 1.02;
+  }
+  .tag {
+    margin-top: 26px;
+    font-size: 30px;
+    line-height: 1.5;
+    color: #A9B6B1;
+    max-width: 30ch;
+  }
+  .foot {
+    margin-top: 44px;
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    font-size: 20px;
+    color: #7C8A85;
+  }
+  .foot .ok { color: #3EC99B; font-weight: 600; }
+  .term {
+    width: 480px;
+    background: #0E1312;
+    border: 1px solid #232D29;
+    border-radius: 16px;
+    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.6);
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    font-size: 21px;
+    line-height: 1.9;
+    overflow: hidden;
+  }
+  .term-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 22px;
+    border-bottom: 1px solid #232D29;
+    color: #7C8A85;
+    font-size: 18px;
+  }
+  .term-bar b { color: #DCE5E2; font-weight: 600; }
+  .term-body { padding: 22px 24px 26px; color: #DCE5E2; }
+  .p { color: #52CFA2; font-weight: 600; }
+  .dim { color: #7C8A85; }
+  .score { color: #5BC493; font-weight: 700; }
+  .crit { color: #ED6A4D; font-weight: 600; }
+  .high { color: #E1913C; font-weight: 600; }
+  .med { color: #CBB35A; font-weight: 600; }
+  .rule { border-top: 1px solid #232D29; margin: 14px 0; }
+  .act { color: #52CFA2; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <svg class="mark" width="84" height="84" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="6" stroke="#3EC99B" stroke-width="2.2"/>
+      <ellipse cx="16" cy="16" rx="13" ry="5.2" stroke="#E8EEEB" stroke-width="2" transform="rotate(-22 16 16)"/>
+      <circle cx="28" cy="13.1" r="2.5" fill="#3EC99B"/>
+    </svg>
+    <h1>Security noise in.<br>Actions out.</h1>
+    <p class="tag">Orbis connects the scanners you already run, explains what matters, and helps you fix it safely.</p>
+    <p class="foot"><span class="ok">open source</span> · local-first · no cloud required</p>
+  </div>
+  <div class="term">
+    <div class="term-bar"><b>orbis scan</b><span>server-01</span></div>
+    <div class="term-body">
+      <span class="p">$</span> orbis scan<br>
+      <span class="dim">collectors: nmap, lynis, trivy, gitleaks</span>
+      <div class="rule"></div>
+      <span class="dim">Score</span>  <span class="score">65 / 100</span><br>
+      <span class="crit">1 critical</span>  <span class="high">1 high</span>  <span class="med">6 medium</span>
+      <div class="rule"></div>
+      <span class="act">→</span> Restrict SSH access<br>
+      <span class="dim">3 findings collapsed into one attack path</span>
+    </div>
+  </div>
+</body>
+</html>

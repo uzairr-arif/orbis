@@ -8,6 +8,8 @@
    ============================================================ */
 
 :root {
+  color-scheme: light;
+
   /* Surface (light) */
   --bg: #F7F8F7;
   --surface: #FFFFFF;
@@ -75,6 +77,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
     --bg: #0D1110;
     --surface: #131917;
     --surface-2: #17201D;
@@ -110,6 +114,8 @@
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
+
   --bg: #0D1110;
   --surface: #131917;
   --surface-2: #17201D;
@@ -386,6 +392,11 @@ h1, h2, h3 {
   transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
 }
 .icon-btn:hover { border-color: var(--ink-3); color: var(--ink); background: var(--surface); }
+
+/* Theme toggle: injected state comes from the head script; without JS the
+   button never appears and the system preference drives everything. */
+.theme-toggle { font-family: inherit; }
+html:not([data-theme]) .theme-toggle { display: none; }
 
 /* ============ Hero ============ */
 
