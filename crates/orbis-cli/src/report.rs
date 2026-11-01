@@ -64,13 +64,11 @@ pub fn overview(state: &State) {
         println!("{}", accent("No open findings."));
         return;
     }
-    println!(
-        "  {}  {}  {}  {}",
-        format!("{c} {}", crit()),
-        format!("{h} {}", high()),
-        format!("{m} {}", medium()),
-        format!("{l} {}", low()),
-    );
+    let crit_line = format!("{c} {}", crit());
+    let high_line = format!("{h} {}", high());
+    let med_line = format!("{m} {}", medium());
+    let low_line = format!("{l} {}", low());
+    println!("  {crit_line}  {high_line}  {med_line}  {low_line}");
     println!();
 
     let top = top_risks(findings, 3);
@@ -149,12 +147,13 @@ pub fn show(f: &Finding) {
         println!("{} {}", dim("cve:"), f.cve.join(", "));
     }
     if let (Some(installed), Some(fixed)) = (&f.affected_version, &f.fixed_version) {
+        let version_line = format!("{installed} -> {fixed}");
         println!(
             "{} {} {} {}",
             dim("component:"),
             f.component,
             dim("version:"),
-            format!("{installed} -> {fixed}")
+            version_line
         );
     }
     println!();
