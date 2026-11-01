@@ -2,6 +2,8 @@
 name = "orbis-core"
 version.workspace = true
 edition.workspace = true
+license.workspace = true
+repository.workspace = true
 description = "Orbis Finding Model: the universal schema every collector normalizes into"
 
 [dependencies]

@@ -10,8 +10,8 @@ members = [
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
-license = "TBD"
-repository = "https://github.com/orbis"
+license = "Apache-2.0"
+repository = "https://github.com/uzairr-arif/orbis"
 
 [workspace.dependencies]
 serde = { version = "1", features = ["derive"] }

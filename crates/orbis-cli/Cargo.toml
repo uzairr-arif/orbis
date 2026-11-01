@@ -2,16 +2,20 @@
 name = "orbis-cli"
 version.workspace = true
 edition.workspace = true
-description = "Orbis command line interface"
+license.workspace = true
+repository.workspace = true
+description = "Security visibility and remediation from your terminal: orchestrates the scanners you already run into one explained, risk-scored view"
+keywords = ["security", "cli", "scanner", "vulnerability", "devsecops"]
+categories = ["command-line-utilities", "development-tools"]
 
 [[bin]]
 name = "orbis"
 path = "src/main.rs"
 
 [dependencies]
-orbis-core = { path = "../orbis-core" }
-orbis-scanner = { path = "../orbis-scanner" }
-orbis-risk = { path = "../orbis-risk" }
+orbis-core = { path = "../orbis-core", version = "0.1.0" }
+orbis-scanner = { path = "../orbis-scanner", version = "0.1.0" }
+orbis-risk = { path = "../orbis-risk", version = "0.1.0" }
 serde = { workspace = true }
 serde_json = { workspace = true }
 anyhow = { workspace = true }

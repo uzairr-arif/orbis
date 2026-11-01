@@ -111,7 +111,7 @@ Prerequisites: a Rust toolchain ([rustup](https://rustup.rs/)); the scanners
 themselves are optional and detected automatically.
 
 ```bash
-cargo install --path crates/orbis-cli
+cargo install orbis-cli
 
 orbis scan --demo                 # try everything offline, no scanners needed
 orbis scan --target localhost     # a real scan; runs whichever tools you have
