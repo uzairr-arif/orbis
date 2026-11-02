@@ -4,10 +4,12 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
 description = "Collector adapters: wrap existing scanners and normalize their output"
 
 [dependencies]
-orbis-core = { path = "../orbis-core", version = "0.1.0" }
+orbis-core = { path = "../orbis-core", version = "0.1.1" }
 serde = { workspace = true }
 serde_json = { workspace = true }
 anyhow = { workspace = true }

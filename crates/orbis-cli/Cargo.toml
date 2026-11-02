@@ -4,6 +4,8 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
 description = "Security visibility and remediation from your terminal: orchestrates the scanners you already run into one explained, risk-scored view"
 keywords = ["security", "cli", "scanner", "vulnerability", "devsecops"]
 categories = ["command-line-utilities", "development-tools"]
@@ -13,9 +15,9 @@ name = "orbis"
 path = "src/main.rs"
 
 [dependencies]
-orbis-core = { path = "../orbis-core", version = "0.1.0" }
-orbis-scanner = { path = "../orbis-scanner", version = "0.1.0" }
-orbis-risk = { path = "../orbis-risk", version = "0.1.0" }
+orbis-core = { path = "../orbis-core", version = "0.1.1" }
+orbis-scanner = { path = "../orbis-scanner", version = "0.1.1" }
+orbis-risk = { path = "../orbis-risk", version = "0.1.1" }
 serde = { workspace = true }
 serde_json = { workspace = true }
 anyhow = { workspace = true }
